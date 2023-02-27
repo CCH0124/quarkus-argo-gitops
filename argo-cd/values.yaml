@@ -1,0 +1,46 @@
+redis-ha:
+  enabled: true
+
+controller:
+  replicas: 1
+
+server:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+  certificate:
+    enabled: false
+    secretName: argo-cch-tls
+    domain: argo.cch.com
+    privateKey:
+      rotationPolicy: Never
+      encoding: PKCS1
+      algorithm: RSA
+      size: 2048
+
+  # TLS certificate configuration via Secret
+  ingress:
+    enabled: true
+    ingressClassName: "nginx"
+    hosts:
+      - argo.cch.com
+    paths:
+      - /
+    pathType: Prefix
+    https: true
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      kubernetes.io/tls-acme: "true"
+    tls:
+      - secretName: argocd-secret # # do not change, this is provided by Argo CD
+        hosts:
+          - argo.cch.com
+repoServer:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+
+applicationSet:
+  replicaCount: 2
