@@ -9,7 +9,7 @@ kubeAPI: # same as `--api-port myhost.my.domain:6445` (where the name would reso
   hostIP: "127.0.0.1" # where the Kubernetes API will be listening on
   hostPort: "6446"
 image: rancher/k3s:v1.23.14-k3s1
-network: lab-net
+network: argo-net
 ports:
   - port: 8081:80
     nodeFilters:
