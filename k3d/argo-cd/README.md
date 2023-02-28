@@ -159,3 +159,33 @@ https://kubernetes.default.svc  in-cluster                  Unknown  Cluster has
 - Destination
   - Cluster Url
   - namespace
+
+### [Automated Sync Policy](https://argo-cd.readthedocs.io/en/stable/user-guide/auto_sync/)
+- Polled every 3 mins
+- Automatic pruning
+- Automatic Self-Healing
+- Repo Server
+- Automated Sync Semantics
+
+### [Sync Options](https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/)
+- Prune
+- Dry-run
+- Apply Only
+  - Skip pre/post sync hooks
+- Force
+
+### [Sync Hook](https://argo-cd.readthedocs.io/en/stable/user-guide/resource_hooks/)
+
+- PreSync
+  - DB schema migration
+- Sync
+- Skip
+- PostSync
+- SyncFail	
+
+### [Health](https://argo-cd.readthedocs.io/en/stable/operator-manual/health/)
+有以下兩個
+
+- Application
+- Resource
+  - Kubernetes 資源(Deployment/Service/PVC)
