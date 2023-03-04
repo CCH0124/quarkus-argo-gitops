@@ -30,7 +30,7 @@ k3d cluster create -c argocd-conf.yaml --servers-memory 4G
 
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
-~/gitops/argo-cd$ helm install argo-cd argo/argo-cd --version 5.23.2 --namespace argo --create-namespace
+~/gitops/argo-cd$ helm install argo-cd argo/argo-cd --version 5.23.2 --namespace argo --create-namespace  -f values.yaml
 NAME: argo-cd
 LAST DEPLOYED: Mon Feb 27 14:54:00 2023
 NAMESPACE: argo

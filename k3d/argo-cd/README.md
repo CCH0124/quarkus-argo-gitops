@@ -45,7 +45,17 @@ WARN[0000] Failed to invoke grpc call. Use flag --grpc-web in grpc calls. To avo
 SERVER                          NAME        VERSION  STATUS   MESSAGE                                                  PROJECT
 https://kubernetes.default.svc  in-cluster           Unknown  Cluster has no applications and is not being monitored.
 ```
+## 變更密碼
 
+```bash
+$ argocd account update-password
+WARN[0000] Failed to invoke grpc call. Use flag --grpc-web in grpc calls. To avoid this warning message, use flag --grpc-web.
+*** Enter password of currently logged in user (admin):
+*** Enter new password for user admin:
+*** Confirm new password for user admin:
+Password updated
+Context 'argo.cch.com:8443' updated
+```
 ## 管理多個 Cluster
 對於 Argo 要管理多個 Kubernetes 來說，會需要 `KUBECONFIG` 來對集群進行管理。
 
@@ -128,7 +138,7 @@ https://kubernetes.default.svc  in-cluster                  Unknown  Cluster has
   - 目標同步的位置
 - Project
   - 邏輯上對應用程式分群
-  - RBAC
+  - RBAC 使用者可以做哪些事情
 
 ### Repositories
 
