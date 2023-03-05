@@ -7,7 +7,7 @@ agents: 1 # same as `--agents 2`
 kubeAPI: # same as `--api-port myhost.my.domain:6445` (where the name would resolve to 127.0.0.1)
   host: "prod.cch.com" # important for the `server` setting in the kubeconfig
   hostIP: "127.0.0.1" # where the Kubernetes API will be listening on
-  hostPort: "6445"
+  hostPort: "6448"
 image: rancher/k3s:v1.23.14-k3s1
 network: argo-net
 ports:

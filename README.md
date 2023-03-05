@@ -73,3 +73,75 @@ annotation: {}
 ![](images/argocd-app-delete.png)
 
 操作很直覺。
+
+#### 手動 
+
+將建立 APPLICATION 中 `GENERAL` 選項中的 `SYNC POLICY` 選擇 `Manual`。
+
+這邊將環境布置到 stage 的集群中。
+
+HELM 的 `VALUE FILE` 指向我們所同步的 Repo `env/values-stage.yaml`。
+
+![](images/argocd-app-stage-helm.png)
+
+因為設定為手動，所以建立時是 `OUTOfSync` 狀態，但該 Application 是知道遠方有個 Repo。
+
+![](images/argocd-app-stage-sync-manual.png)
+
+此時需要手動點擊 `Sync`，並跳出下圖右方頁籤接這再點擊頁籤的 `SYNCHRONIZE` 即可同步。
+
+
+>SYNCHRONIZE RESOURCES 屬於選擇性同步，他不會被記錄在 `HISTORY AND ROLLBACK` 中
+
+
+這邊我們再建立一個 prod 集群環境，並在 `SYNC POLICY` 選項中選擇 `Automatic` 和 `SELF HEAL` 自我修復。
+
+### 應用程式其他應用功能
+
+點擊 Applications 下 api-dev 應用程式再點擊 `APP DETAILS` 再選擇 `PARAMETERS`，可以看到詳細 Helm 的配置內容如下
+
+![](images/argocd-app-helm-dev-app-details-parameters.png)
+
+將應用程式佈署至 dev 集群的時候透過以下方式可以得到當前 API `/hello` 內容
+
+```bash
+$ curl http://dev.cch.com:8081/api/dev/hello
+Hello dev
+```
+
+接著透過修改 `ingress.hosts[0].paths[0].path` 這個值，來看 ArgoCD 的處理。從上圖當前的狀態來看使用 `values-dev.yaml` 檔案進行佈署。藉由上圖中的 `EDIT` 即可來更新，將`ingress.hosts[0].paths[0].path` 值變成 `/api/test(/|$)(.*)`，並按下 `SAVE`，最後結果如下圖
+
+![](images/argocd-app-parameters-change-dev-values.png)
+
+ArgoCD 上會有一個圖式表示那個值有被異動。
+
+再透過 `curl` 測試執行
+
+```bash
+$ curl http://dev.cch.com:8081/api/dev/hello
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+$ curl http://dev.cch.com:8081/api/test/hello
+Hello dev
+```
+
+透過 `SYNC STATUS` 可以看到異動資訊，如下
+
+![](images/argocd-app-change-dev-values-sync-status.png)
+
+DURATION 什麼時間點前異動
+INTIATED BY 誰做的，這邊是自動。如果是手動，那就會顯示是哪個登入者觸發。
+
+
+
+### SELF HEAL
+
+前面再 Prod 環境中有開啟此自動修復功能，目前 Prod 所佈署的內容為 1 個副本，此時我們遠端操作該 Prod 所佈署的 `Deployment` 資源。
+
+
+
