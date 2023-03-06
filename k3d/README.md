@@ -25,7 +25,7 @@ replicaset.apps/ingress-nginx-controller-7d5fb757db   1         1         1     
 1. Argo
 
 ```bash
-k3d cluster create -c argocd-conf.yaml --servers-memory 4G
+k3d cluster create -c argocd-conf.yaml --servers-memory 6G
 ```
 
 ```bash
