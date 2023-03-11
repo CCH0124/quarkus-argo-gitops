@@ -199,3 +199,11 @@ https://kubernetes.default.svc  in-cluster                  Unknown  Cluster has
 - Application
 - Resource
   - Kubernetes 資源(Deployment/Service/PVC)
+
+### State
+- Target state
+  - 所需的期望狀態，由 Git 儲存庫中的檔案表示
+- Live state
+  - 應用程式當前狀態，像是部署了哪些 Pods 等當前狀態
+- Sync status
+  - 表示當前狀態是否與目標狀態一致，部署的物件是否與 Git 管控的內容所描述的一樣
