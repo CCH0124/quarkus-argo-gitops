@@ -1,7 +1,7 @@
-## Lab
+## Lab1
 1. application kubernetes-api
 2. Helm Chart
-3. Deploy application with different values into dev/stage cluster
+3. Deploy application with different values into dev/stage/prod cluster(Create Repo/Application)
 4. Try different sync mode
 5. Update git repo(Helm/application)
 
