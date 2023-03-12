@@ -207,3 +207,7 @@ https://kubernetes.default.svc  in-cluster                  Unknown  Cluster has
   - 應用程式當前狀態，像是部署了哪些 Pods 等當前狀態
 - Sync status
   - 表示當前狀態是否與目標狀態一致，部署的物件是否與 Git 管控的內容所描述的一樣
+
+##  [Declarative ArgoCD](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
+對於 ArgoCD 中 application、projects 或一些同步設定等，都可以透過宣告式方式來進行。這對於管理方面來說都會是一個很好的方式。
+
