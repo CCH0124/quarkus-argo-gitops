@@ -34,6 +34,8 @@ spec:
         configs:
           cm:
             ...
+            exec.enabled: true
+            exec.shells: "bash,sh,powershell,cmd"
             accounts.devuser: login
             accounts.pmuser: login
             accounts.opsuser: login
@@ -60,10 +62,12 @@ spec:
                 p, role:op, accounts, *,  *, allow
                 p, role:op, certificates, *,  *, allow
                 p, role:op, gpgkeys, *,  *, allow
+                p, role:op, exec, create, */*, allow
                 g, opsuser, role:op
 
 ```
 
+詳細資訊可參考[官方](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/)
 
 ### Verify the Users
 ```
@@ -109,3 +113,7 @@ g, devuser, role:dev
 對於 dev-project/* 下的 Application 都可以進行操作但被限制於 `dev-project` 下；但對於 projects、repositories、clusters 都只能獲取，不能夠新增或更新。這邊對於應用程式佈署我們限制於 `dev-project` 同時只有 dev 叢集能佈署，只要是其它叢集都會被拒絕。
 
 對於 pmuser 可以看到資源，但基本沒權限建立像是 projects、repositories、clusters 等。
+
+對於 opsuser 在配置上多了，`exec` 選項在權限上只有賦予 opsuser 能夠有這個選項。如下圖
+
+![](images/argocd-exec.png)
