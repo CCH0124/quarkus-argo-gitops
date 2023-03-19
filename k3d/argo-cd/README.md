@@ -211,3 +211,66 @@ https://kubernetes.default.svc  in-cluster                  Unknown  Cluster has
 ##  [Declarative ArgoCD](https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/)
 對於 ArgoCD 中 application、projects 或一些同步設定等，都可以透過宣告式方式來進行。這對於管理方面來說都會是一個很好的方式。
 
+## [User Management](https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/)
+- [Local users](https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/#local-usersaccounts-v15)
+  - 小團隊
+  - 對 Argocd 進行存取像是 CICD 流程中
+  - 每個使用者都可以有 `apiKey` 或是 `login` 的能力
+  - 沒有 Group 等概念
+- [SSO](https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/#sso)
+
+## 權限控管
+### [Projects](https://argo-cd.readthedocs.io/en/stable/user-guide/projects/)
+使用 `AppProject` 資源。對應用程式上的邏輯群組概念。
+- 可以被佈署的範圍
+  - 一個 Repo
+- 佈署的目標
+  - 集群或是 `namespace`
+- 可被佈署的物件
+  - CRDS、DaemonSet 等
+- 整合 RBAC
+
+預設 Project 如下
+```yaml
+spec:
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+```
+### [RBAC](https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/)
+使用 `ConfigMap` 配置。RBAC 功能可以限制對 Argo CD 資源的訪問。需要 SSO 配置或一個或多個本地用戶設置。
+
+**其基本內置角色有以下**
+
+- role:readonly - read-only access to all resources
+- role:admin - unrestricted access to all resources
+
+**權限結構**
+- `p, <role/user/group>, <resource>, <action>, <object>`
+- `p, <role/user/group>, <resource>, <action>, <appproject>/<object>`
+
+`P` 表示 policy；`Resources` 包含以下
+- clusters 
+- projects 
+- applications
+- applicationsets
+- repositories
+- certificates
+- accounts
+- gpgkeys
+- logs
+- exec
+
+`Actions` 包含以下
+- get 
+- create
+- update
+- delete
+- sync
+- override
+- `action/<group/kind/action-name>`
