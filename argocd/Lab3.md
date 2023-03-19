@@ -17,3 +17,7 @@
 
 
 
+## Ref
+
+- [ArgoCD to manage itself](https://www.pcbaecker.com/posts/setup-argocd/)
+- [Application gitopsified](https://blog.codecentric.de/gitops-argocd)
