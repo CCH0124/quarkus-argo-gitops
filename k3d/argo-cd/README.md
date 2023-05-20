@@ -193,6 +193,14 @@ https://kubernetes.default.svc  in-cluster                  Unknown  Cluster has
 - PostSync
 - SyncFail	
 
+|Hook| Description |Use case|
+|---|---|---|
+|PreSync| Executes prior to the application of the manifests| Database migrations|
+|Sync| Executes at the same time as manifests| Complex rolling update strategies like canary releases or dark launches|
+|PostSync |Executes after all Sync hooks have completed and were successful (healthy)|Run tests to validate deployment was correctly done|
+|SyncFail |Executes when the sync operation fails| Rollback operations in case of failure| 
+|Skip| Skip the application of the manifest| When manual steps are required to deploy the application (i.e., releasing public traffic to new version)|
+
 ### [Health](https://argo-cd.readthedocs.io/en/stable/operator-manual/health/)
 有以下兩個
 
