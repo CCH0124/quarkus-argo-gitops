@@ -96,3 +96,9 @@ config:  2701 bytes
 name:    17 bytes
 server:  24 bytes
 ```
+
+
+**REF:**
+- https://medium.com/@mprzygrodzki/argocd-applicationsset-with-helm-72bb6362d494
+- https://cloud.redhat.com/blog/configuring-openshift-cluster-with-applicationsets-using-helmkustomize-and-acm-policies
+- https://kubebyexample.com/learning-paths/argo-cd/argo-cd-working-kustomize
