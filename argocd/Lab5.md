@@ -68,7 +68,7 @@ spec:
 
 這個模板定義後效果如下圖
 
-![](argocd/images/applicationSet-matrix-matrix.png)
+![](images/applicationSet-matrix-matrix.png)
 
 未來只要新增一個團隊至 list 下的 elements 時，dev 和 stage 環境都會被加上對於該 team 的 namespace 資源限制。
 
